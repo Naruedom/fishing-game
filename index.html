@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<style>
+    body {
+        background-color: rgb(122, 199, 235);
+    }
+
+    .layout {
+        position: absolute;
+        left: 45%;
+        width: 100px;
+        height: 400px;
+    }
+
+    .seek-a {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 35px;
+        height: 400px;
+        background-color: #fff;
+        border-radius: 2px;
+    }
+
+    .seek-b {
+        position: absolute;
+        left: 50px;
+        top: 0px;
+        width: 35px;
+        height: 400px;
+        background-color: #fff;
+        border-radius: 2px;
+    }
+
+    .fish {
+        position: absolute;
+        left: 8px;
+        width: 35px;
+        bottom: 200px;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .fish-display {
+        z-index: 3;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 30px;
+        background-color: rgb(255, 174, 0);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .stick {
+        position: absolute;
+        left: 0px;
+        width: 35px;
+        background-color: rgb(0, 0, 0);
+        border-radius: 2px;
+        z-index: 1;
+    }
+
+    .stick-display {
+        margin: 0;
+        position: absolute;
+        width: 35px;
+        background-color: rgb(52, 219, 80);
+        z-index: 2;
+        border-radius: 2px;
+        opacity: 0.8;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .percent {
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        width: 35px;
+        height: 100px;
+        background-color: rgb(1, 124, 255);
+        border-radius: 2px;
+    }
+
+    .btn-rod {
+        color: #fff;
+        width: 50px;
+        border-radius: 10px;
+        border: rgb(255, 123, 0);
+        background-color: rgb(255, 123, 0);
+        cursor: pointer;
+    }
+
+    .btn-rod:hover {
+        background-color: rgb(255, 187, 0);
+    }
+
+    .btn-fish {
+        color: #fff;
+        width: 50px;
+        border-radius: 10px;
+        border: rgb(0, 166, 255);
+        background-color: rgb(0, 166, 255);
+        cursor: pointer;
+    }
+
+    .btn-fish:hover {
+        background-color: rgb(0, 204, 255);
+    }
+</style>
+
+<body>
+    <div style="position: absolute; width: 90%; height: 90%;" id="app" @mousedown="down" @mouseup="up">
+
+        <!-- <pre @mousedown="down" @mouseup="up" style="color: white;">
+stick: {{stick}},
+fish: {{fish}},
+isDown: {{isDown}},
+percent: {{percent}},
+fishPattern: {{fishPattern}},
+fishPatternIndex: {{fishPatternIndex}},
+</pre> -->
+        <div style="text-align: center; margin-top: 50px;">
+            <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Rod</span>
+            <button class="btn-rod" @click="setRod(1)">LV 1</button>
+            <button class="btn-rod" @click="setRod(2)">LV 2</button>
+            <button class="btn-rod" @click="setRod(3)">LV 3</button>
+            <button class="btn-rod" @click="setRod(4)">LV 4</button>
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Fish</span>
+            <button class="btn-fish" @click="setFish(1)">LV 1</button>
+            <button class="btn-fish" @click="setFish(2)">LV 2</button>
+            <button class="btn-fish" @click="setFish(3)">LV 3</button>
+            <button class="btn-fish" @click="setFish(4)">LV 4</button>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <div class="layout">
+                <div class="seek-a">
+                    <div class="stick" :style="{ bottom: stickDisplay + 'px'}">
+                        <div class="stick-display" :style="{ height: (stickRangDisplay*2) + 'px' }"></div>
+                    </div>
+                    <div class="fish" :style="{ bottom: fishDisplay + 'px' }">
+                        <div class="fish-display"></div>
+                    </div>
+                </div>
+                <div class="seek-b">
+                    <div class="percent"
+                        :style="{ height: percentDisplay + 'px', 'background-color': percent<99?'rgb('+ (255-(percent*2.5)) +','+(percent*1.8)+','+(percent*2.5)+')':'rgb(1, 247, 255)' }">
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            stick: 50,
+            stickRang: 10,
+            fishLv: 1,
+            fish: 81,
+            fishPattern: [],
+            fishPatternIndex: 0,
+            isDown: 0,
+            speed: 8,
+            percent: 50,
+        },
+        created: function () {
+            this.getFishPattern();
+            this.setRod(3);
+            this.start();
+        },
+        methods: {
+            up() {
+                this.isDown = 0;
+            },
+            down() {
+                this.isDown = 1;
+            },
+            isPercentUp() {
+
+                if (this.stick + this.stickRang > this.fish && this.stick - this.stickRang < this.fish)
+                    return true;
+                else
+                    return false;
+            },
+            swimFish() {
+
+                const t = this.fishPattern[this.fishPatternIndex];
+                const s = 0.25 * (this.fishLv);
+
+                if (this.fish < t) {
+                    this.fish += s;
+                }
+
+                else if (this.fish > t) {
+                    this.fish -= s;
+                }
+
+                if (Math.floor(this.fish) == Math.floor(t)) {
+                    this.fishPatternIndex++
+                    if (this.fishPatternIndex == this.fishPattern.length - 1)
+                        this.fishPatternIndex = 0;
+                }
+            },
+            start() {
+                setInterval(() => {
+                    this.swimFish();
+                    if (this.isDown) {
+                        if (this.stick < 100 - this.stickRang)
+                            this.stick += 0.75;
+                    }
+                    else {
+                        if (this.stick > 0 + this.stickRang)
+                            this.stick -= 0.75;
+                    }
+
+                    if (this.isPercentUp() && this.percent < 100)
+                        this.percent += 0.25;
+                    else if (this.percent > 0)
+                        this.percent -= 0.25;
+
+                }, this.speed);
+            },
+            getFishPattern() {
+                const arr = [];
+                for (let index = 0; index < 15; index++) {
+                    arr.push(Math.floor(Math.random() * 90) + 5);
+                }
+                this.fishPattern = arr;
+                this.fishPatternIndex = 0;
+            },
+            setRod(level) {
+                this.stick = 50;
+                this.stickRang = 5 + (level * 3);
+                this.fish = 5;
+                this.isDown = 0;
+                this.percent = 50;
+            },
+            setFish(level) {
+                this.getFishPattern();
+                this.fishLv = level;
+                this.stick = 50;
+                this.fish = 5;
+                this.isDown = 0;
+                this.percent = 50;
+            },
+        },
+        computed: {
+            stickDisplay: function () {
+                return this.stick * 4;
+            },
+            stickRangDisplay: function () {
+                return this.stickRang * 4;
+            },
+            percentDisplay: function () {
+                return this.percent * 4;
+            },
+            fishDisplay: function () {
+                return this.fish * 4;
+            }
+        },
+    })
+</script>
