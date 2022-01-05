@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fishing Game</title>
+    <title>Fishing Game.</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <style>
@@ -143,7 +143,7 @@ fishPatternIndex: {{fishPatternIndex}},
             <button class="btn-fish" @click="setFish(3)">LV 3</button>
             <button class="btn-fish" @click="setFish(4)">LV 4</button>
         </div>
-        
+
         <div style="text-align: center; margin-top: 30px;">
             <div class="layout">
                 <div class="seek-a">
@@ -159,7 +159,7 @@ fishPatternIndex: {{fishPatternIndex}},
                         :style="{ height: percentDisplay + 'px', 'background-color': percent<99?'rgb('+ (255-(percent*2.5)) +','+(percent*1.8)+','+(percent*2.5)+')':'rgb(1, 247, 255)' }">
                     </div>
                 </div>
-    
+
             </div>
         </div>
     </div>
