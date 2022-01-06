@@ -16,6 +16,11 @@
     }
 
     .layout {
+        height: 400px;
+        z-index: 5;
+    }
+
+    .game-layout {
         position: absolute;
         left: 45%;
         width: 100px;
@@ -56,7 +61,8 @@
         width: 20px;
         height: 20px;
         border-radius: 30px;
-        background-color: rgb(255, 174, 0);
+        font-size: 18px;
+        /* background-color: rgb(255, 174, 0); */
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
     }
@@ -123,15 +129,15 @@
 
     <div id="app">
         <ul class="nav justify-content-end">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#" @click="setPage('home')">Home</a>
-            </li>
             <!-- <li class="nav-item">
-                <a class="nav-link text-white" href="#" @click="setPage('comment')">Comment</a>
-            </li>
-            <li class="nav-item">
+                <a class="nav-link text-white" href="#" @click="setPage('home')">Home</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link text-white" href="#" @click="setPage('comment')">comment</a>
+            </li> -->
+            <!-- <li class="nav-item">
                 <a class="nav-link text-white" href="#" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">Tip me</a>
+                    data-bs-target="#exampleModal">donate</a>
             </li> -->
         </ul>
 
@@ -140,19 +146,24 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tip me</h5>
+                        <h5 class="modal-title text-center" id="exampleModalLabel">Thanyou 😊</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-body text-center">
+                        <div style="color: rgb(17, 124, 223); font-weight: bold; flex: 20px;">PromptPay</div>
+                        <div>
+                            <img width="200" src="./asset/pp.jpg" alt="PromptPay">
+                        </div>
+                        <div style="margin-top: 20px; margin-bottom: 20px; font-size: 20px; color: rgb(138, 138, 138);">or</div>
+                        <a href="https://www.paypal.com/paypalme/naruedom" target="_blank" style="color: rgb(17, 124, 223); font-size: 25px; font-weight: bold;">PayPal</a>
+                        <div class="text-end mt-5">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div v-if="page=='home'" style="position: absolute; width: 90%; height: 90%;" @mousedown="down" @mouseup="up">
+        <div v-if="page=='home'" @mousedown="down" @mouseup="up">
 
             <!-- <pre @mousedown="down" @mouseup="up" style="color: white;">
         stick: {{stick}},
@@ -180,20 +191,22 @@
 
             <div v-if="true" style="text-align: center; margin-top: 30px;">
                 <div class="layout">
-                    <div class="seek-a">
-                        <div class="stick" :style="{ bottom: stickDisplay + 'px'}">
-                            <div class="stick-display" :style="{ height: (stickRangDisplay*2) + 'px' }"></div>
+                    <div class="game-layout">
+                        <div class="seek-a">
+                            <div class="stick" :style="{ bottom: stickDisplay + 'px'}">
+                                <div class="stick-display" :style="{ height: (stickRangDisplay*2) + 'px' }"></div>
+                            </div>
+                            <div class="fish" :style="{ bottom: fishDisplay + 'px' }">
+                                <div class="fish-display">🐳</div>
+                            </div>
                         </div>
-                        <div class="fish" :style="{ bottom: fishDisplay + 'px' }">
-                            <div class="fish-display"></div>
+                        <div class="seek-b">
+                            <div class="percent"
+                                :style="{ height: percentDisplay + 'px', 'background-color': percent<99?'rgb('+ (255-(percent*2.5)) +','+(percent*1.8)+','+(percent*2.5)+')':'rgb(1, 247, 255)' }">
+                            </div>
                         </div>
-                    </div>
-                    <div class="seek-b">
-                        <div class="percent"
-                            :style="{ height: percentDisplay + 'px', 'background-color': percent<99?'rgb('+ (255-(percent*2.5)) +','+(percent*1.8)+','+(percent*2.5)+')':'rgb(1, 247, 255)' }">
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
@@ -203,14 +216,13 @@
         </div>
     </div>
 
-    <!-- <div>
+    <div style="margin-top: 50px;">
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous"
             src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v12.0&appId=192106223075360&autoLogAppEvents=1"
             nonce="DmLA8mHV"></script>
-    
-        <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="500" data-numposts="9">
-    </div> -->
+
+        <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="500" data-numposts="9"></div>
 
     </div>
 
@@ -338,4 +350,5 @@
             }
         },
     })
+    /* บัคไม่มี บารมีไม่เกิด 🤣 */
 </script>
