@@ -47,6 +47,16 @@
         border-radius: 2px;
     }
 
+    .seek-c {
+        position: absolute;
+        font-size: 20px;
+        color: #000;
+        left: 100px;
+        top: 0px;
+        width: 100px;
+        height: 400px;
+    }
+
     .fish {
         position: absolute;
         left: 8px;
@@ -129,6 +139,16 @@
         border-radius: 5px;
         margin-bottom: 50px;
     }
+
+    .win-layout {
+        background-color: rgba(0, 0, 0, 0.5);
+        left: 0px;
+        top: 0px;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        z-index: 6;
+    }
 </style>
 
 <body>
@@ -145,7 +165,21 @@
                 <a class="nav-link text-white" href="#" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">donate</a>
             </li> -->
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#winModal">win</a>
+            </li>
         </ul>
+
+        <div v-if="!isRun" class="win-layout pt-5">
+            <div class="text-center mt-5">
+                <div style="font-size: 100px;">{{fishs[fishLv-1]}}</div>
+                <div style="color: #fff; font-size: 50px; margin-top: -20px; font-weight: bold;">+1</div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-info btn-lg mt-5 px-5 text-white" @click="play()">PLAY</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -173,28 +207,28 @@
         </div>
         <div v-if="page=='home'" @mousedown="down" @mouseup="up">
 
-            <!-- <pre @mousedown="down" @mouseup="up" style="color: white;">
-        stick: {{stick}},
+            <!-- <pre @mousedown="down" @mouseup="up" style="color: white;"> -->
+            <!-- stick: {{stick}},
         fish: {{fish}},
         isDown: {{isDown}},
-        percent: {{percent}},
-        fishPattern: {{fishPattern}},
-        fishPatternIndex: {{fishPatternIndex}},
-        </pre> -->
+        percent: {{percent}}, -->
+            <!-- fishPattern: {{fishPattern.toString()}}, -->
+            <!-- fishPatternIndex: {{fishPatternIndex}}, -->
+            <!-- </pre> -->
             <div style="text-align: center; margin-top: 50px;">
                 <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Rod</span>
-                <button class="btn-rod" @click="setRod(1)">LV 1</button>
-                <button class="btn-rod" @click="setRod(2)">LV 2</button>
-                <button class="btn-rod" @click="setRod(3)">LV 3</button>
-                <button class="btn-rod" @click="setRod(4)">LV 4</button>
+                <button class="btn-rod" @click="setRod(1)">Lv.1</button>
+                <button class="btn-rod" @click="setRod(2)">Lv.2</button>
+                <button class="btn-rod" @click="setRod(3)">Lv.3</button>
+                <button class="btn-rod" @click="setRod(4)">Lv.4</button>
             </div>
             <br>
             <div style="text-align: center;">
                 <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Fish</span>
-                <button class="btn-fish" @click="setFish(1)">LV 1</button>
-                <button class="btn-fish" @click="setFish(2)">LV 2</button>
-                <button class="btn-fish" @click="setFish(3)">LV 3</button>
-                <button class="btn-fish" @click="setFish(4)">LV 4</button>
+                <button class="btn-fish" @click="setFish(1)">Lv.1</button>
+                <button class="btn-fish" @click="setFish(2)">Lv.2</button>
+                <button class="btn-fish" @click="setFish(3)">Lv.3</button>
+                <button class="btn-fish" @click="setFish(4)">Lv.4</button>
             </div>
 
             <div v-if="true" style="text-align: center; margin-top: 30px;">
@@ -205,13 +239,20 @@
                                 <div class="stick-display" :style="{ height: (stickRangDisplay*2) + 'px' }"></div>
                             </div>
                             <div class="fish" :style="{ bottom: fishDisplay + 'px' }">
-                                <div class="fish-display">🐳</div>
+                                <div class="fish-display">{{fishs[fishLv-1]}}</div>
                             </div>
                         </div>
                         <div class="seek-b">
                             <div class="percent"
                                 :style="{ height: percentDisplay + 'px', 'background-color': percent<99?'rgb('+ (255-(percent*2.5)) +','+(percent*1.8)+','+(percent*2.5)+')':'rgb(1, 247, 255)' }">
                             </div>
+                        </div>
+
+                        <div class="seek-c text-start">
+                            <div v-show="score[0]>0">{{fishs[0]}} x {{score[0]}}</div>
+                            <div v-show="score[1]>0">{{fishs[1]}} x {{score[1]}}</div>
+                            <div v-show="score[2]>0">{{fishs[2]}} x {{score[2]}}</div>
+                            <div v-show="score[3]>0">{{fishs[3]}} x {{score[3]}}</div>
                         </div>
 
                     </div>
@@ -248,6 +289,8 @@
         el: '#app',
         data: {
             page: 'home',
+            fishs: ['🐟', '🐠', '🦈', '🐋'],
+            score: [0, 0, 0, 0],
             stick: 50,
             stickRang: 10,
             fishLv: 1,
@@ -257,6 +300,7 @@
             isDown: 0,
             speed: 8,
             percent: 50,
+            isRun: false,
         },
         created: function () {
             this.getFishPattern();
@@ -272,6 +316,16 @@
             },
             down() {
                 this.isDown = 1;
+            },
+            win() {
+                this.isRun = false;
+                this.score[this.fishLv - 1]++;
+            },
+            play() {
+                this.stick = 50;
+                this.isDown = 0;
+                this.percent = 50;
+                this.isRun = true;
             },
             isPercentUp() {
 
@@ -301,6 +355,9 @@
             },
             start() {
                 setInterval(() => {
+                    if (!this.isRun)
+                        return;
+
                     this.swimFish();
                     if (this.isDown) {
                         if (this.stick < 100 - this.stickRang)
@@ -316,6 +373,9 @@
                     else if (this.percent > 0)
                         this.percent -= 0.25;
 
+                    if (this.percent >= 100)
+                        this.win();
+
                 }, this.speed);
             },
             getFishPattern() {
@@ -327,6 +387,7 @@
                 this.fishPatternIndex = 0;
             },
             setRod(level) {
+                this.isRun = true;
                 this.stick = 50;
                 this.stickRang = 5 + (level * 3);
                 this.fish = 5;
@@ -334,6 +395,7 @@
                 this.percent = 50;
             },
             setFish(level) {
+                this.isRun = true;
                 this.getFishPattern();
                 this.fishLv = level;
                 this.stick = 50;
