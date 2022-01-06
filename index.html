@@ -59,7 +59,7 @@
 
     .fish {
         position: absolute;
-        left: 8px;
+        left: 5px;
         width: 35px;
         bottom: 200px;
         background-color: rgb(0, 0, 0);
@@ -161,10 +161,9 @@
             <!-- <li class="nav-item">
                 <a class="nav-link text-white" href="#" @click="setPage('comment')">comment</a>
             </li> -->
-            <!-- <li class="nav-item">
-                <a class="nav-link text-white" href="#" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">donate</a>
-            </li> -->
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" title="ช่วยค่ากาแฟ">donate</a>
+            </li>
         </ul>
 
         <div v-if="!isRun" class="win-layout pt-5">
@@ -213,18 +212,18 @@
             <!-- </pre> -->
             <div style="text-align: center; margin-top: 50px;">
                 <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Rod</span>
-                <button class="btn-rod" @click="setRod(1)">Lv.1</button>
-                <button class="btn-rod" @click="setRod(2)">Lv.2</button>
-                <button class="btn-rod" @click="setRod(3)">Lv.3</button>
-                <button class="btn-rod" @click="setRod(4)">Lv.4</button>
+                <button class="btn btn-warning text-white mx-1 py-1 px-3" @click="setRod(1)">Lv.1</button>
+                <button class="btn btn-warning text-white mx-1 py-1 px-3" @click="setRod(2)">Lv.2</button>
+                <button class="btn btn-warning text-white mx-1 py-1 px-3" @click="setRod(3)">Lv.3</button>
+                <button class="btn btn-warning text-white mx-1 py-1 px-3" @click="setRod(4)">Lv.4</button>
             </div>
             <br>
             <div style="text-align: center;">
                 <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Fish</span>
-                <button class="btn-fish" @click="setFish(1)">Lv.1</button>
-                <button class="btn-fish" @click="setFish(2)">Lv.2</button>
-                <button class="btn-fish" @click="setFish(3)">Lv.3</button>
-                <button class="btn-fish" @click="setFish(4)">Lv.4</button>
+                <button class="btn btn-primary mx-1 py-1 px-3" @click="setFish(1)">Lv.1</button>
+                <button class="btn btn-primary mx-1 py-1 px-3" @click="setFish(2)">Lv.2</button>
+                <button class="btn btn-primary mx-1 py-1 px-3" @click="setFish(3)">Lv.3</button>
+                <button class="btn btn-primary mx-1 py-1 px-3" @click="setFish(4)">Lv.4</button>
             </div>
 
             <div v-if="true" style="text-align: center; margin-top: 30px;">
