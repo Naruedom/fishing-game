@@ -189,7 +189,7 @@
                 <button class="btn-fish" @click="setFish(4)">LV 4</button>
             </div>
 
-            <!-- <div v-if="true" style="text-align: center; margin-top: 30px;">
+            <div v-if="true" style="text-align: center; margin-top: 30px;">
                 <div class="layout">
                     <div class="game-layout">
                         <div class="seek-a">
@@ -208,7 +208,7 @@
 
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div v-if="page=='comment'" style="text-align: center; margin-top: 50px;">
 
@@ -217,15 +217,11 @@
     </div>
 
     <div class="text-center" style="margin-top: 100px;">
-        
-        <div>
-            <div id="fb-root"></div>
-            <script async defer crossorigin="anonymous"
-                src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v12.0&appId=192106223075360&autoLogAppEvents=1"
-                nonce="DmLA8mHV"></script>
-            <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="500" data-numposts="9" data-colorscheme="dark"></div>
-        </div>
-
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v12.0&appId=192106223075360&autoLogAppEvents=1"
+            nonce="DmLA8mHV"></script>
+        <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="500" data-numposts="9" data-colorscheme="dark"></div>
     </div>
 
 
