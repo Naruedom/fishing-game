@@ -121,23 +121,18 @@
 
 <body>
 
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v12.0&appId=192106223075360&autoLogAppEvents=1"
-        nonce="DmLA8mHV"></script>
-
     <div id="app">
         <ul class="nav justify-content-end">
             <li class="nav-item">
                 <a class="nav-link text-white" href="#" @click="setPage('home')">Home</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link text-white" href="#" @click="setPage('comment')">Comment</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="#" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">Tip me</a>
-            </li>
+            </li> -->
         </ul>
 
         <!-- Modal -->
@@ -183,7 +178,7 @@
                 <button class="btn-fish" @click="setFish(4)">LV 4</button>
             </div>
 
-            <div v-if="false" style="text-align: center; margin-top: 30px;">
+            <div v-if="true" style="text-align: center; margin-top: 30px;">
                 <div class="layout">
                     <div class="seek-a">
                         <div class="stick" :style="{ bottom: stickDisplay + 'px'}">
@@ -204,9 +199,16 @@
         </div>
         <div v-if="page=='comment'" style="text-align: center; margin-top: 50px;">
 
-            <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="500"
-                data-numposts="9"></div>
+
         </div>
+    </div>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v12.0&appId=192106223075360&autoLogAppEvents=1"
+        nonce="DmLA8mHV"></script>
+
+    <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="500" data-numposts="9">
     </div>
 
 
