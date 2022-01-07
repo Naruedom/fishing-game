@@ -229,9 +229,14 @@
 
             <div class="mt-3" style="text-align: center;">
                 <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Fish Pattern</span>
-                <input class="" style="width: 224px;" id="pattern" v-model="userFishPattern"
-                    placeholder=" 20,90,40,80 ">
-                <div class="mt-2" style="font-size: 10px; color: #fff; text-align: center;">{{fishPattern}}</div>
+                <input class="" style="width: 224px; border: 0px; border-radius: 5px;" id="pattern" v-model="userFishPattern"
+                    placeholder=" 20,90,20,22 ">
+                <div class="mt-2" style="font-size: 10px; color: #fff; text-align: center;">
+                    <!-- {{fishPattern.join(' - ')}} -->
+                    <span class="px-1" v-for="(fp, index) in fishPattern">
+                        <span :style="{ color: fishPatternIndex==index?'#247aad':'#fff'}">{{fp}}</span>
+                    </span>
+                </div>
             </div>
 
             <div v-if="true" style="text-align: center; margin-top: 30px;">
