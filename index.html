@@ -162,7 +162,8 @@
                 <a class="nav-link text-white" href="#" @click="setPage('comment')">comment</a>
             </li> -->
             <li class="nav-item">
-                <a class="nav-link text-white" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" title="ช่วยค่ากาแฟ">donate</a>
+                <a class="nav-link text-white" href="#" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" title="ช่วยค่ากาแฟ">donate</a>
             </li>
         </ul>
 
@@ -224,6 +225,13 @@
                 <button class="btn btn-primary mx-1 py-1 px-3" @click="setFish(2)">Lv.2</button>
                 <button class="btn btn-primary mx-1 py-1 px-3" @click="setFish(3)">Lv.3</button>
                 <button class="btn btn-primary mx-1 py-1 px-3" @click="setFish(4)">Lv.4</button>
+            </div>
+
+            <div class="mt-3" style="text-align: center;">
+                <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Fish Pattern</span>
+                <input class="" style="width: 224px;" id="pattern" v-model="userFishPattern"
+                    placeholder=" 20,90,40,80 ">
+                <div class="mt-2" style="font-size: 10px; color: #fff; text-align: center;">{{fishPattern}}</div>
             </div>
 
             <div v-if="true" style="text-align: center; margin-top: 30px;">
@@ -291,6 +299,7 @@
             fishLv: 1,
             fish: 81,
             fishPattern: [],
+            userFishPattern: [],
             fishPatternIndex: 0,
             isDown: 0,
             speed: 8,
@@ -344,7 +353,7 @@
 
                 if (Math.floor(this.fish) == Math.floor(t)) {
                     this.fishPatternIndex++
-                    if (this.fishPatternIndex == this.fishPattern.length - 1)
+                    if (this.fishPatternIndex == this.fishPattern.length)
                         this.fishPatternIndex = 0;
                 }
             },
@@ -391,7 +400,8 @@
             },
             setFish(level) {
                 this.isRun = true;
-                this.getFishPattern();
+                if (!this.userFishPattern.length)
+                    this.getFishPattern();
                 this.fishLv = level;
                 this.stick = 50;
                 this.fish = 5;
@@ -413,6 +423,25 @@
                 return this.fish * 4;
             }
         },
+        watch: {
+            userFishPattern: function (val) {
+                let arr = val.split(",");
+                arr = arr.map(n => {
+                    let f = parseFloat(n);
+                    if (f > 100)
+                        f = 100;
+                    else if (f < 0)
+                        f = 0;
+                    return f;
+                });
+                if (arr.length > 1) {
+                    this.fishPattern = arr;
+                    this.fishPatternIndex = 0;
+                } else {
+                    this.getFishPattern();
+                }
+            },
+        }
     })
     /* บัคไม่มี บารมีไม่เกิด 🤣 */
 </script>
