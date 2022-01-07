@@ -12,7 +12,7 @@
 </head>
 <style>
     body {
-        background-color: rgb(122, 199, 235);
+        background-color: rgb(32, 46, 63);
     }
 
     .layout {
@@ -141,7 +141,7 @@
     }
 
     .win-layout {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.7);
         left: 0px;
         top: 0px;
         height: 100%;
@@ -168,11 +168,11 @@
         </ul>
 
         <div v-if="!isRun" class="win-layout pt-5">
-            <div class="text-center mt-5">
-                <div style="font-size: 100px;">{{fishs[fishLv-1]}}</div>
-                <div style="color: #fff; font-size: 50px; margin-top: -20px; font-weight: bold;">+1</div>
+            <div class="text-center mt-5 pt-5">
+                <div class="mt-5" style="font-size: 100px;">{{fishs[fishLv-1]}}</div>
+                <div style="color: #fff; font-size: 25px; margin-top: -20px; font-weight: bold;">+1</div>
                 <div class="text-center">
-                    <button type="button" class="btn btn-info btn-lg mt-5 px-5 text-white" @click="play()">PLAY</button>
+                    <button type="button" class="btn btn-info btn-lg mt-5 px-5 text-white" @click="play()">OK</button>
                 </div>
             </div>
         </div>
