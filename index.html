@@ -47,6 +47,19 @@
         border-radius: 2px;
     }
 
+    .ruler {
+        z-index: 2;
+        background-color: rgb(235, 179, 95);
+        position: absolute;
+        left: 50px;
+        top: -500px;
+        width: 150px;
+        height: 1500px;
+        box-shadow: 2px 2px 2px 2px;
+        border-left:rgb(185, 121, 25) dashed 5px;
+        border-right:rgb(255, 234, 167) double 20px;
+    }
+
     .seek-c {
         position: absolute;
         font-size: 20px;
@@ -233,6 +246,7 @@
                     v-model="userFishPattern" placeholder=" 20,90,20,22 ">
                 <div class="mt-2" style="font-size: 10px; color: #fff; text-align: center;">
                     <!-- {{fishPattern.join(' - ')}} -->
+                    <span @click="isRuler=!isRuler" style="font-size: 20px; cursor: pointer;" title="yes it is a ruler.">📏</span>
                     <span class="px-1" v-for="(fp, index) in fishPattern">
                         <span :style="{ color: fishPatternIndex==index?'#247aad':'#fff'}">{{fp}}</span>
                     </span>
@@ -255,6 +269,7 @@
                                 :style="{ height: percentDisplay + 'px', 'background-color': percent<99?'rgb('+ (255-(percent*2.5)) +','+(percent*1.8)+','+(percent*2.5)+')':'rgb(1, 247, 255)' }">
                             </div>
                         </div>
+                        <div v-show="isRuler" class="ruler"></div>
 
                         <div class="seek-c text-start">
                             <div v-show="score[0]>0">{{fishs[0]}} x {{score[0]}}</div>
@@ -319,6 +334,7 @@
             speed: 8,
             percent: 50,
             isRun: false,
+            isRuler: false,
         },
         created: function () {
             this.getFishPattern();
