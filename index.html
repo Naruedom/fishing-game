@@ -170,6 +170,9 @@
         <ul class="nav justify-content-end">
             <!-- <li class="nav-item">
                 <a class="nav-link text-white" href="#" @click="setPage('home')">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#" @click="setPage('price')">price</a>
             </li> -->
             <!-- <li class="nav-item">
                 <a class="nav-link text-white" href="#" @click="setPage('comment')">comment</a>
@@ -283,13 +286,31 @@
                 </div>
             </div>
         </div>
+        <!-- <div v-if="page=='price'" style="text-align: center; margin-top: 50px;">
+            <div class="text-white h1">
+                <span class="mr-2">GIL</span> <span>${{ parseFloat(gil.price).toFixed( 5 ) }}</span>
+            </div>
+            <div class="text-white">
+                <span class="mr-2"></span> <span>฿{{ parseFloat(gil.price*33).toFixed( 2 ) }}</span>
+            </div>
+        </div> -->
         <div v-if="page=='comment'" style="text-align: center; margin-top: 50px;">
 
 
         </div>
+        
+        <div class="text-center my-4">
+            <div class="text-white h1">
+                <span class="mr-2">GIL</span> <span>${{ parseFloat(gil.price).toFixed( 5 ) }}</span>
+            </div>
+            <div class="text-white">
+                <span class="mr-2"></span> <span>฿{{ parseFloat(gil.price*33).toFixed( 2 ) }}</span>
+            </div>
+        </div>
+
     </div>
 
-    <div class="text-center" style="margin-top: 100px;">
+    <div class="text-center">
 
         <div id="fb-root"></div>
 
@@ -297,14 +318,14 @@
             src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v12.0&appId=192106223075360&autoLogAppEvents=1"
             nonce="DmLA8mHV"></script>
 
-        <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="500" data-numposts="9"
-            data-colorscheme="dark"></div>
-
         <div class="my-2">
             <div class="fb-like" data-href="https://naruedom.github.io/fishing-game" data-width=""
                 data-layout="standard" data-action="like" data-size="small" data-share="true" data-colorscheme="dark">
             </div>
         </div>
+
+        <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="500" data-numposts="9"
+            data-colorscheme="dark"></div>
 
     </div>
 
@@ -317,16 +338,17 @@
 
     <div id="sfc3l5z4dwubrq6kz3qwfnutgbln5yhm5r1"></div>
 
-    <div class="text-center">
+    <div class="text-center mb-3">
         <a href="https://www.freecounterstat.com" title="visitors">
-            <img src="https://counter2.stat.ovh/private/freecounterstat.php?c=3l5z4dwubrq6kz3qwfnutgbln5yhm5r1" alt="visitors">
+            <img src="https://counter2.stat.ovh/private/freecounterstat.php?c=3l5z4dwubrq6kz3qwfnutgbln5yhm5r1"
+                alt="visitors">
         </a>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </body>
 
 </html>
-
 
 <script>
     var app = new Vue({
@@ -347,11 +369,18 @@
             percent: 50,
             isRun: false,
             isRuler: false,
+            gil: {
+                price: 0,
+            },
+            fhtn: {
+                price: 0,
+            }
         },
         created: function () {
             this.getFishPattern();
             this.setRod(3);
             this.start();
+            this.getGIL();
         },
         methods: {
             setPage(page) {
@@ -450,6 +479,13 @@
                 this.isDown = 0;
                 this.percent = 50;
             },
+            getGIL() {
+                axios.get('https://api.pancakeswap.info/api/v2/tokens/0xc5b9b7dcb988c86ba37853761fea692772c9937d')
+                    .then(res => {
+                        this.gil.price = res.data.data.price;
+                    })
+                    .catch(error => console.error(error));
+            }
         },
         computed: {
             stickDisplay: function () {
