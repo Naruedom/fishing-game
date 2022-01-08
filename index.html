@@ -56,8 +56,8 @@
         width: 150px;
         height: 1500px;
         box-shadow: 2px 2px 2px 2px;
-        border-left:rgb(185, 121, 25) dashed 5px;
-        border-right:rgb(255, 234, 167) double 20px;
+        border-left: rgb(185, 121, 25) dashed 5px;
+        border-right: rgb(255, 234, 167) double 20px;
     }
 
     .seek-c {
@@ -246,7 +246,8 @@
                     v-model="userFishPattern" placeholder=" 20,90,20,22 ">
                 <div class="mt-2" style="font-size: 10px; color: #fff; text-align: center;">
                     <!-- {{fishPattern.join(' - ')}} -->
-                    <span @click="isRuler=!isRuler" style="font-size: 20px; cursor: pointer;" title="yes it is a ruler.">📏</span>
+                    <span @click="isRuler=!isRuler" style="font-size: 20px; cursor: pointer;"
+                        title="yes it is a ruler.">📏</span>
                     <span class="px-1" v-for="(fp, index) in fishPattern">
                         <span :style="{ color: fishPatternIndex==index?'#247aad':'#fff'}">{{fp}}</span>
                     </span>
@@ -301,16 +302,30 @@
 
         <div class="my-2">
             <div class="fb-like" data-href="https://naruedom.github.io/fishing-game" data-width=""
-                data-layout="standard" data-action="like" data-size="small" data-share="true" data-colorscheme="dark"></div>
+                data-layout="standard" data-action="like" data-size="small" data-share="true" data-colorscheme="dark">
+            </div>
         </div>
 
     </div>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <div id="sfc3l5z4dwubrq6kz3qwfnutgbln5yhm5r1"></div>
+
+    <!-- <script type="text/javascript" -->
+        <!-- src="https://counter2.stat.ovh/private/counter.js?c=3l5z4dwubrq6kz3qwfnutgbln5yhm5r1&down=async" async></script> -->
+
+    <div class="text-center">
+        <a href="https://www.freecounterstat.com" title="visitors">
+            <img src="https://counter2.stat.ovh/private/freecounterstat.php?c=3l5z4dwubrq6kz3qwfnutgbln5yhm5r1" alt="visitors">
+        </a>
+    </div>
+
 </body>
 
 </html>
