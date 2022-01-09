@@ -8,164 +8,12 @@
     <title>Fishing Game.</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    body {
-        background-color: rgb(119 174 237);
-    }
-
-    .layout {
-        height: 400px;
-        z-index: 5;
-    }
-
-    .game-layout {
-        position: absolute;
-        left: 45%;
-        width: 100px;
-        height: 400px;
-    }
-
-    .seek-a {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 35px;
-        height: 400px;
-        background-color: #fff;
-        border-radius: 2px;
-    }
-
-    .seek-b {
-        position: absolute;
-        left: 50px;
-        top: 0px;
-        width: 35px;
-        height: 400px;
-        background-color: #fff;
-        border-radius: 2px;
-    }
-
-    .ruler {
-        z-index: 2;
-        background-color: rgb(235, 179, 95);
-        position: absolute;
-        left: 50px;
-        top: -500px;
-        width: 150px;
-        height: 1500px;
-        box-shadow: 2px 2px 2px 2px;
-        border-left: rgb(185, 121, 25) dashed 5px;
-        border-right: rgb(255, 234, 167) double 20px;
-    }
-
-    .seek-c {
-        position: absolute;
-        font-size: 20px;
-        color: #000;
-        left: 100px;
-        top: 0px;
-        width: 100px;
-        height: 400px;
-    }
-
-    .fish {
-        position: absolute;
-        left: 5px;
-        width: 35px;
-        bottom: 200px;
-        background-color: rgb(0, 0, 0);
-    }
-
-    .fish-display {
-        z-index: 3;
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border-radius: 30px;
-        font-size: 18px;
-        /* background-color: rgb(255, 174, 0); */
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-    }
-
-    .stick {
-        position: absolute;
-        left: 0px;
-        width: 35px;
-        background-color: rgb(0, 0, 0);
-        border-radius: 2px;
-        z-index: 1;
-    }
-
-    .stick-display {
-        margin: 0;
-        position: absolute;
-        width: 35px;
-        background-color: rgb(52, 219, 80);
-        z-index: 2;
-        border-radius: 2px;
-        opacity: 0.8;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-    }
-
-    .percent {
-        position: absolute;
-        left: 0px;
-        bottom: 0px;
-        width: 35px;
-        height: 100px;
-        background-color: rgb(1, 124, 255);
-        border-radius: 2px;
-    }
-
-    .btn-rod {
-        color: #fff;
-        width: 50px;
-        border-radius: 10px;
-        border: rgb(255, 123, 0);
-        background-color: rgb(255, 123, 0);
-        cursor: pointer;
-    }
-
-    .btn-rod:hover {
-        background-color: rgb(255, 187, 0);
-    }
-
-    .btn-fish {
-        color: #fff;
-        width: 50px;
-        border-radius: 10px;
-        border: rgb(0, 166, 255);
-        background-color: rgb(0, 166, 255);
-        cursor: pointer;
-    }
-
-    .btn-fish:hover {
-        background-color: rgb(0, 204, 255);
-    }
-
-    .fb-comments {
-        background-color: #bed7ef;
-        border-radius: 5px;
-        margin-bottom: 50px;
-    }
-
-    .win-layout {
-        background-color: rgba(0, 0, 0, 0.7);
-        left: 0px;
-        top: 0px;
-        height: 100%;
-        width: 100%;
-        position: fixed;
-        z-index: 6;
-    }
-</style>
 
 <body>
 
+    <!-- START APP -->
     <div id="app">
         <ul class="nav justify-content-end">
             <!-- <li class="nav-item">
@@ -177,6 +25,9 @@
             <!-- <li class="nav-item">
                 <a class="nav-link text-white" href="#" @click="setPage('comment')">comment</a>
             </li> -->
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#" @click="toggleBackground()">{{!isDarkmode?'dark mode':'light mode'}}</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="#" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#exampleModal" title="ช่วยค่ากาแฟ">donate</a>
@@ -227,6 +78,7 @@
             <!-- fishPattern: {{fishPattern.toString()}}, -->
             <!-- fishPatternIndex: {{fishPatternIndex}}, -->
             <!-- </pre> -->
+            
             <div style="text-align: center; margin-top: 50px;">
                 <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Rod</span>
                 <button class="btn btn-warning text-white mx-1 py-1 px-3" @click="setRod(1)">Lv.1</button>
@@ -295,8 +147,6 @@
             </div>
         </div> -->
         <div v-if="page=='comment'" style="text-align: center; margin-top: 50px;">
-
-
         </div>
         
         <div class="text-center my-4">
@@ -308,7 +158,11 @@
             </div>
         </div>
 
+        <div class="background" :style="{ 'background-color': isDarkmode?'rgb(45, 56, 71)':'rgb(119 174 237)'}"></div>
+
     </div>
+    <!-- END APP -->
+
 
     <div class="text-center">
 
@@ -338,188 +192,15 @@
 
     <div id="sfc3l5z4dwubrq6kz3qwfnutgbln5yhm5r1"></div>
 
-    <div class="text-center mb-3">
+    <!-- <div class="text-center mb-3">
         <a href="https://www.freecounterstat.com" title="visitors">
             <img src="https://counter2.stat.ovh/private/freecounterstat.php?c=3l5z4dwubrq6kz3qwfnutgbln5yhm5r1"
                 alt="visitors">
         </a>
-    </div>
+    </div> -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
 
 </body>
 
 </html>
-
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            page: 'home',
-            fishs: ['🐟', '🐠', '🦈', '🐋'],
-            score: [0, 0, 0, 0],
-            stick: 50,
-            stickRang: 10,
-            fishLv: 1,
-            fish: 81,
-            fishPattern: [],
-            userFishPattern: [],
-            fishPatternIndex: 0,
-            isDown: 0,
-            speed: 8,
-            percent: 50,
-            isRun: false,
-            isRuler: false,
-            gil: {
-                price: 0,
-            },
-            fhtn: {
-                price: 0,
-            }
-        },
-        created: function () {
-            this.getFishPattern();
-            this.setRod(3);
-            this.start();
-            this.getGIL();
-        },
-        methods: {
-            setPage(page) {
-                this.page = page;
-            },
-            up() {
-                this.isDown = 0;
-            },
-            down() {
-                this.isDown = 1;
-            },
-            win() {
-                this.isRun = false;
-                this.score[this.fishLv - 1]++;
-            },
-            play() {
-                this.stick = 50;
-                this.isDown = 0;
-                this.percent = 50;
-                this.isRun = true;
-            },
-            isPercentUp() {
-
-                if (this.stick + this.stickRang > this.fish && this.stick - this.stickRang < this.fish)
-                    return true;
-                else
-                    return false;
-            },
-            swimFish() {
-
-                const t = this.fishPattern[this.fishPatternIndex];
-                const s = 0.25 * (this.fishLv);
-
-                if (this.fish < t) {
-                    this.fish += s;
-                }
-
-                else if (this.fish > t) {
-                    this.fish -= s;
-                }
-
-                if (Math.floor(this.fish) == Math.floor(t)) {
-                    this.fishPatternIndex++
-                    if (this.fishPatternIndex == this.fishPattern.length)
-                        this.fishPatternIndex = 0;
-                }
-            },
-            start() {
-                setInterval(() => {
-                    if (!this.isRun)
-                        return;
-
-                    this.swimFish();
-                    if (this.isDown) {
-                        if (this.stick < 100 - this.stickRang)
-                            this.stick += 0.75;
-                    }
-                    else {
-                        if (this.stick > 0 + this.stickRang)
-                            this.stick -= 0.75;
-                    }
-
-                    if (this.isPercentUp() && this.percent < 100)
-                        this.percent += 0.25;
-                    else if (this.percent > 0)
-                        this.percent -= 0.25;
-
-                    if (this.percent >= 100)
-                        this.win();
-
-                }, this.speed);
-            },
-            getFishPattern() {
-                const arr = [];
-                for (let index = 0; index < 15; index++) {
-                    arr.push(Math.floor(Math.random() * 90) + 5);
-                }
-                this.fishPattern = arr;
-                this.fishPatternIndex = 0;
-            },
-            setRod(level) {
-                this.isRun = true;
-                this.stick = 50;
-                this.stickRang = 5 + (level * 3);
-                this.fish = 5;
-                this.isDown = 0;
-                this.percent = 50;
-            },
-            setFish(level) {
-                this.isRun = true;
-                if (!this.userFishPattern.length)
-                    this.getFishPattern();
-                this.fishLv = level;
-                this.stick = 50;
-                this.fish = 5;
-                this.isDown = 0;
-                this.percent = 50;
-            },
-            getGIL() {
-                axios.get('https://api.pancakeswap.info/api/v2/tokens/0xc5b9b7dcb988c86ba37853761fea692772c9937d')
-                    .then(res => {
-                        this.gil.price = res.data.data.price;
-                    })
-                    .catch(error => console.error(error));
-            }
-        },
-        computed: {
-            stickDisplay: function () {
-                return this.stick * 4;
-            },
-            stickRangDisplay: function () {
-                return this.stickRang * 4;
-            },
-            percentDisplay: function () {
-                return this.percent * 4;
-            },
-            fishDisplay: function () {
-                return this.fish * 4;
-            }
-        },
-        watch: {
-            userFishPattern: function (val) {
-                let arr = val.split(",");
-                arr = arr.map(n => {
-                    let f = parseFloat(n);
-                    if (f > 100)
-                        f = 100;
-                    else if (f < 0)
-                        f = 0;
-                    return f;
-                });
-                if (arr.length > 1) {
-                    this.fishPattern = arr;
-                    this.fishPatternIndex = 0;
-                } else {
-                    this.getFishPattern();
-                }
-            },
-        }
-    })
-    /* บัคไม่มี บารมีไม่เกิด 🤣 */
-</script>
