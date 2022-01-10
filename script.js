@@ -2,13 +2,13 @@ var app = new Vue({
     el: '#app',
     data: {
         page: 'home',
-        fishs: ['🐟', '🐠', '🦈', '🐋'],
+        fishs: ['🐟', '🐠', '🦈', '🐋', '🐋'],
         score: [0, 0, 0, 0],
         stick: 50,
         stickRang: 10,
         fishLv: 1,
         fish: 81,
-        fishPattern: [],
+        fishPattern: [{ y: 10, sec: 1 }],
         userFishPattern: [],
         fishPatternIndex: 0,
         isDown: 0,
@@ -16,6 +16,7 @@ var app = new Vue({
         percent: 50,
         isRun: false,
         isRuler: false,
+        sec: 0,
         gil: {
             price: 0,
         },
@@ -26,13 +27,13 @@ var app = new Vue({
     },
     created: function () {
         this.getFishPattern();
-        this.setRod(3);
+        this.setRod(1);
         this.start();
         this.getGIL();
     },
     methods: {
         toggleBackground() {
-            this.isDarkmode =! this.isDarkmode;
+            this.isDarkmode = !this.isDarkmode;
         },
         setPage(page) {
             this.page = page;
@@ -62,22 +63,34 @@ var app = new Vue({
         },
         swimFish() {
 
-            const t = this.fishPattern[this.fishPatternIndex];
-            const s = 0.25 * (this.fishLv);
+            const fpt = this.fishPattern[this.fishPatternIndex];
+            const px = 0.25 * (this.fishLv);
 
-            if (this.fish < t) {
-                this.fish += s;
+            if (fpt.sec <= this.sec) {
+
+                // swim up
+                if (this.fish < fpt.y) {
+                    this.fish += px;
+                }
+
+                // swim down
+                else if (this.fish > fpt.y) {
+                    this.fish -= px;
+                }
+
+                // next Y
+                if (Math.floor(this.fish) == Math.floor(fpt.y)) {
+                    this.fishPatternIndex++
+                    this.sec = 0;
+                    if (this.fishPatternIndex == this.fishPattern.length)
+                        this.fishPatternIndex = 0;
+                }
+            }
+            else {
+                this.sec++;
             }
 
-            else if (this.fish > t) {
-                this.fish -= s;
-            }
 
-            if (Math.floor(this.fish) == Math.floor(t)) {
-                this.fishPatternIndex++
-                if (this.fishPatternIndex == this.fishPattern.length)
-                    this.fishPatternIndex = 0;
-            }
         },
         start() {
             setInterval(() => {
@@ -107,7 +120,9 @@ var app = new Vue({
         getFishPattern() {
             const arr = [];
             for (let index = 0; index < 15; index++) {
-                arr.push(Math.floor(Math.random() * 90) + 5);
+                const y = Math.floor(Math.random() * 90) + 5;
+                const sec = (10 - this.fishLv) * 5;
+                arr.push({ y, sec });
             }
             this.fishPattern = arr;
             this.fishPatternIndex = 0;
@@ -161,7 +176,7 @@ var app = new Vue({
                     f = 100;
                 else if (f < 0)
                     f = 0;
-                return f;
+                return { y: f, sec: (10 - this.fishLv) * 5 };
             });
             if (arr.length > 1) {
                 this.fishPattern = arr;

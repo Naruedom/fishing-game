@@ -15,9 +15,10 @@
     left: 0px;
     top: 0px;
     width: 35px;
-    height: 400px;
+    height: 410px;
     background-color: #fff;
     border-radius: 2px;
+    border: 5px groove rgb(255, 201, 121);
 }
 
 .seek-b {
@@ -25,9 +26,10 @@
     left: 50px;
     top: 0px;
     width: 35px;
-    height: 400px;
+    height: 410px;
     background-color: #fff;
     border-radius: 2px;
+    border: 5px groove rgb(255, 201, 121);
 }
 
 .ruler {
@@ -55,7 +57,7 @@
 
 .fish {
     position: absolute;
-    left: 5px;
+    left: 1px;
     width: 35px;
     bottom: 200px;
     background-color: rgb(0, 0, 0);
@@ -85,20 +87,21 @@
 .stick-display {
     margin: 0;
     position: absolute;
-    width: 35px;
-    background-color: rgb(52, 219, 80);
+    width: 25px;
+    background-color: rgb(0, 235, 39);
     z-index: 2;
     border-radius: 2px;
     opacity: 0.8;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    border-bottom: 3px solid rgb(27, 153, 31);
 }
 
 .percent {
     position: absolute;
     left: 0px;
     bottom: 0px;
-    width: 35px;
+    width: 25px;
     height: 100px;
     background-color: rgb(1, 124, 255);
     border-radius: 2px;
