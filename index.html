@@ -73,14 +73,14 @@
         </div>
         <div v-if="page=='home'" @mousedown="down" @mouseup="up">
 
-            <pre style="color: white;">
+            <!-- <pre style="color: white;"> -->
             <!-- stick: {{stick}},
         fish: {{fish}},
         isDown: {{isDown}},
         percent: {{percent}}, -->
             <!-- fishPattern: {{fishPattern.toString()}}, -->
             <!-- fishPatternIndex: {{fishPatternIndex}}, -->
-            </pre>
+            <!-- </pre> -->
 
             <div style="text-align: center;">
                 <span style="font-size: 16px; font-weight: bold; color: white; margin-right: 10px;">Rod</span>
@@ -151,12 +151,12 @@
         <div v-if="page=='comment'" style="text-align: center; margin-top: 50px;">
         </div>
         
-        <div class="text-center my-4">
+        <div class="text-center my-5">
             <div class="text-white h1">
                 <span class="mr-2">GIL</span> <span>${{ parseFloat(gil.price).toFixed( 5 ) }}</span>
             </div>
-            <div class="text-white">
-                <span class="mr-2"></span> <span>฿{{ parseFloat(gil.price*33).toFixed( 2 ) }}</span>
+            <div class="text-white h3">
+                <span class="mr-2"></span> <span>({{ parseFloat(gil.price*33).toFixed( 2 ) }} บาท)</span>
             </div>
         </div>
 
@@ -166,7 +166,7 @@
     <!-- END APP -->
 
 
-    <div class="text-center">
+    <div class="text-center mt-5">
 
         <div id="fb-root"></div>
 
@@ -180,7 +180,7 @@
             </div>
         </div>
 
-        <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="435" data-numposts="5"
+        <div class="fb-comments" data-href="https://naruedom.github.io/fishing-game" data-width="435" data-numposts="2"
             data-colorscheme="dark"></div>
 
     </div>

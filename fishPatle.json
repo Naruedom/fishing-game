@@ -1,0 +1,44 @@
+"fish": {
+        "id": "fish001",
+        "sizemin": 25,
+        "sizemax": 100,
+        "weightmin": 0.2,
+        "weightmax": 10,
+        "rarity": "rarity_common",
+        "season": "season_spring",
+        "location": "location_river",
+        "unward": 0.5,
+        "downward": 0.5,
+        "stop": 1,
+        "exp": 1,
+        "priceMin": "3",
+        "priceMax": "5",
+        "itemPrototype": {
+            "id": "fish001",
+            "name": "Barbel",
+            "description": "Just a common Barbel in a river",
+            "rarity": "rarity_common",
+            "category": "item_category_material",
+            "itemType": "item_type_fish",
+            "times": "-1",
+            "function": "",
+            "effect1": {
+                "effectType": "",
+                "amount": "0"
+            },
+            "effect2": {
+                "effectType": "",
+                "amount": "0"
+            },
+            "buy": {
+                "currency": "off-chain",
+                "id": "currency02",
+                "value": "0"
+            },
+            "sell": {
+                "currency": "off-chain",
+                "id": "currency02",
+                "value": "0"
+            }
+        }
+    },
