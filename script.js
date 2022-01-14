@@ -20,6 +20,7 @@ var app = new Vue({
         gil: {
             price: 0,
         },
+        gilAmount: 1,
         fhtn: {
             price: 0,
         },

@@ -151,12 +151,19 @@
         <div v-if="page=='comment'" style="text-align: center; margin-top: 50px;">
         </div>
         
-        <div class="text-center my-5">
-            <div class="text-white h1">
-                <span class="mr-2">GIL</span> <span>${{ parseFloat(gil.price).toFixed( 5 ) }}</span>
-            </div>
-            <div class="text-white h3">
-                <span class="mr-2"></span> <span>({{ parseFloat(gil.price*33).toFixed( 2 ) }} บาท)</span>
+        <div class="container pt-5">
+            <div class="row justify-content-center">
+                <div class="col-xl-7">
+                    <div class="row justify-content-center text-center text-white h5">
+                        <div class="col-12 col-lg-4 mb-2">
+                            <span>GIL</span>
+                            <input class="" style="width: 120px; border: 0px; border-radius: 5px; text-align: center;" v-model="gilAmount" type="number">
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-2">${{ parseFloat(gil.price * gilAmount).toFixed( 3 ) }}</div>
+                        <div class="col-12 col-md-4 col-lg-2">฿{{ parseFloat(gil.price * gilAmount * 33).toFixed( 3 ) }}</div>
+                        <div class="col-12 col-md-4 col-lg-2">¥{{ parseFloat(gil.price * gilAmount * 115).toFixed( 3 ) }}</div>
+                    </div>
+                </div>
             </div>
         </div>
 
