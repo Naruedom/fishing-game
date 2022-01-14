@@ -135,8 +135,14 @@
 
 .fb-comments {
     background-color: #bed7ef;
-    border-radius: 5px;
-    margin-bottom: 50px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.flagcounter > a > img {
+    background-color: #bed7ef;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .win-layout {
@@ -163,3 +169,4 @@
     /* background-color: rgb(119 174 237); */
     background-color: rgb(45, 56, 71);
 }
+
